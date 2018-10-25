@@ -1,2 +1,2 @@
 # Keras-Learning
-The project is for Learning Keras
+The project is for Learning Keras.
