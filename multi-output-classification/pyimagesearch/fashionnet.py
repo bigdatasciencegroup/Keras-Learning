@@ -22,8 +22,12 @@ class FashionNet:
 		# CONV => RELU => POOL
 		x = Conv2D(32, (3, 3), padding="same")(x)
 		x = Activation("relu")(x)
+		# 批量标准化层
+                # 该层在每个batch上将前一层的激活值重新规范化，即使得其输出数据的均值接近0，其标准差接近1
+                # (1)加速收敛; (2)控制过拟合，可以少用或不用Dropout和正则; (3)降低网络对初始化权重不敏感; (4)允许使用较大的学习率
 		x = BatchNormalization(axis=chanDim)(x)
 		x = MaxPooling2D(pool_size=(3, 3))(x)
+                # 为输入数据施加Dropout. Dropout将在训练过程中每次更新参数时按一定概率(rate)随机断开输入神经元, Dropout层用于防止过拟合.
 		x = Dropout(0.25)(x)
 
 		# (CONV => RELU) * 2 => POOL
@@ -48,7 +52,9 @@ class FashionNet:
 
 		# define a branch of output layers for the number of different
 		# clothing categories (i.e., shirts, jeans, dresses, etc.)
+		# 展平一个张量
 		x = Flatten()(x)
+		# 全连接层
 		x = Dense(256)(x)
 		x = Activation("relu")(x)
 		x = BatchNormalization()(x)

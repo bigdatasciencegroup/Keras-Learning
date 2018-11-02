@@ -3,7 +3,7 @@
 
 # set the matplotlib backend so figures can be saved in the background
 import matplotlib
-matplotlib.use("Agg")
+matplotlib.use("Agg") #没有GUI时使用matplotlib绘图,需在前添加该句话
 
 # import the necessary packages
 from keras.optimizers import Adam
