@@ -23,7 +23,7 @@ class FashionNet:
 		x = Conv2D(32, (3, 3), padding="same")(x)
 		x = Activation("relu")(x)
 		# 批量标准化层
-                # 该层在每个batch上将前一层的激活值重新规范化，即使得其输出数据的均值接近0，其标准差接近1
+		# 该层在每个batch上将前一层的激活值重新规范化，即使得其输出数据的均值接近0，其标准差接近1
                 # (1)加速收敛; (2)控制过拟合，可以少用或不用Dropout和正则; (3)降低网络对初始化权重不敏感; (4)允许使用较大的学习率
 		x = BatchNormalization(axis=chanDim)(x)
 		x = MaxPooling2D(pool_size=(3, 3))(x)
